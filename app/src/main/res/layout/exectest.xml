@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+
+                                                   android:id="@+id/exec_test">
+
+    <TextView
+            android:id="@+id/m1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#efefef"
+            android:text="10"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            app:layout_constraintRight_toLeftOf="@id/msign"
+            app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
+            app:layout_constraintTop_toTopOf="@id/upGuideline"
+            />
+
+    <TextView
+            android:id="@+id/msign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#e0e0e0"
+            android:textColor="@color/black"
+            android:text="X"
+            android:textSize="30sp"
+            app:layout_constraintLeft_toRightOf="@id/m1"
+            app:layout_constraintRight_toLeftOf="@id/m2"
+            app:layout_constraintTop_toTopOf="@id/upGuideline" />
+
+    <TextView
+            android:id="@+id/m2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#efefef"
+            android:textColor="@color/black"
+            android:text="10"
+            android:textSize="30sp"
+            app:layout_constraintLeft_toRightOf="@id/msign"
+            app:layout_constraintRight_toLeftOf="@id/eqsign"
+            app:layout_constraintTop_toTopOf="@id/upGuideline" />
+
+    <TextView
+            android:id="@+id/eqsign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#efefef"
+            android:textColor="@color/black"
+            android:text="="
+            android:textSize="30sp"
+            app:layout_constraintLeft_toRightOf="@id/m2"
+            app:layout_constraintRight_toLeftOf="@id/mres"
+            app:layout_constraintTop_toTopOf="@id/upGuideline" />
+
+    <EditText
+            android:id="@+id/mres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:inputType="phone"
+            android:maxLength="3"
+            android:ems="2"
+            android:hint="\?"
+            app:layout_constraintLeft_toRightOf="@id/eqsign"
+            app:layout_constraintRight_toRightOf="@id/rightGuideline"
+            app:layout_constraintTop_toTopOf="@id/upGuideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/leftGuideline"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25"/>
+
+    <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rightGuideline"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75"/>
+
+    <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/upGuideline"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25"/>
+
+    <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/downGuideline"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75"/>
+
+    <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#efefef"
+            android:textSize="30sp"
+            android:text="NO RES"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Следующий"
+            android:onClick="nextTask"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/downGuideline"
+    />
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:layout_width="77dp"-->
+<!--            android:layout_height="57dp" tools:layout_editor_absoluteX="261dp"-->
+<!--            tools:layout_editor_absoluteY="272dp" android:id="@+id/mResL">-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+<!--    <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:layout_width="72dp"-->
+<!--            android:layout_height="58dp"-->
+<!--            android:hint="hint" tools:layout_editor_absoluteY="272dp" tools:layout_editor_absoluteX="261dp"-->
+<!--            android:id="@+id/mRes"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
