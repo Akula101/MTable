@@ -4,8 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.appcompat.app.AppCompatActivity;
 import com.maxim.mtable.calc.ExecTask;
@@ -17,14 +16,23 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    private List<ExecTask> taskList;
-    private  int currentTaskIdx = 0;
+    private Exercise currentExercise = null;
+    private boolean isRandom = false;
+
+    private int currentNumber = 2;
+
+    private Spinner spinner;
+    private static final String[] num_items = new String[9];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        taskList = Exercise.generateExecTasks();
+        for(int i = 0; i < 9;i++) {
+            num_items[i] = String.valueOf(i+2);
+        }
+
+
 
         setContentView(R.layout.exectest);
 
@@ -33,17 +41,21 @@ public class MainActivity extends AppCompatActivity {
         resultField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                ExecTask currentTask = taskList.get(currentTaskIdx);
-                TextView resText = findViewById(R.id.result);
+                ExecTask currentTask = currentExercise.getCurrent();
+                //TextView resText = findViewById(R.id.result);
+                ImageView resImg = findViewById(R.id.resImage);
                 currentTask.inputMissedValue(Integer.parseInt(textView.getText().toString()));
 
                 if(currentTask.check()) {
-                    resText.setText("CORRECT");
-                    resText.setTextColor(Color.GREEN);
+//                    resText.setText("CORRECT");
+//                    resText.setTextColor(Color.GREEN);
+                    resImg.setImageResource(R.mipmap.chek);
+                    resImg.setVisibility(View.VISIBLE);
+                    textView.clearFocus();
                 }
                 else {
-                    resText.setText("WRONG");
-                    resText.setTextColor(Color.RED);
+                    resImg.setImageResource(R.mipmap.cross);
+                    resImg.setVisibility(View.VISIBLE);
 
                 }
                 currentTask.rollbackMissedValue();
@@ -51,7 +63,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        setCurrentTask();
+        Spinner spinner =findViewById(R.id.number_choice);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
+                android.R.layout.simple_spinner_item,num_items);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                currentNumber = position + 2;
+                resetExercise();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        Switch switchRandom = findViewById(R.id.random_mode);
+        switchRandom.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isRandom = isChecked;
+                resetExercise();
+            }
+        });
+
+        resetExercise();
 
     }
 
@@ -61,20 +101,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setNextTask() {
-        currentTaskIdx++;
+        currentExercise.getNext();
         setCurrentTask();
     }
 
+    private void resetExercise() {
+        currentExercise = Exercise.generateExercise(currentNumber, isRandom);
+        setCurrentTask();;
+    }
+
     private void setCurrentTask() {
-        ExecTask currentTask = taskList.get(currentTaskIdx);
+        ExecTask currentTask = currentExercise.getCurrent();
         TextView m1 = findViewById(R.id.m1);
         TextView m2 = findViewById(R.id.m2);
         TextView m3 = findViewById(R.id.mres);
         m1.setText(String.valueOf(currentTask.getM1()));
         m2.setText(String.valueOf(currentTask.getM2()));
         m3.setText("");
-        TextView resText = findViewById(R.id.result);
-        resText.setText("");
+        ImageView resImg = findViewById(R.id.resImage);
+        resImg.setVisibility(View.INVISIBLE);
+
+
 
     }
 
