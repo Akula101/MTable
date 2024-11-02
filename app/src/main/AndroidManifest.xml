@@ -6,9 +6,9 @@
             android:allowBackup="true"
             android:dataExtractionRules="@xml/data_extraction_rules"
             android:fullBackupContent="@xml/backup_rules"
-            android:icon="@mipmap/plsworkgood"
+            android:icon="@mipmap/finalversion"
             android:label="@string/app_name"
-            android:roundIcon="@mipmap/plsworkx4"
+            android:roundIcon="@mipmap/finalversion"
             android:supportsRtl="true"
             android:theme="@style/Theme.MTable"
             tools:targetApi="31">
